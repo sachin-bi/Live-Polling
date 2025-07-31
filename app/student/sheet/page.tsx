@@ -14,15 +14,21 @@ export default function SheetPage() {
       setQuestionAvailable(true);
     };
 
-    // Connect socket if not connected
-    if (!socket.connected) {
-      socket.connect();
-    }
+    const handleConnect = () => {
+      socket.emit('join-as-student');
+      console.log('👨‍🎓 join-as-student emitted from /student/sheet');
+    };
 
-    // Listen for new question
+    // Setup listeners
+    socket.on('connect', handleConnect);
     socket.on('new-question', handleNewQuestion);
 
+      // Ensure connection
+    if (!socket.connected) socket.connect();
+    else handleConnect();
+
     return () => {
+      socket.off('connect', handleConnect);
       socket.off('new-question', handleNewQuestion);
     };
   }, []);

@@ -13,7 +13,7 @@ const StudentPg: React.FC = () => {
     }
 
     // Store name in sessionStorage (per tab)
-    sessionStorage.setItem('studentName', name.trim());
+    // sessionStorage.setItem('studentName', name.trim());
 
     // Redirect to /student/sheet
     router.push('/student/sheet');
