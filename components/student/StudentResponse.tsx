@@ -3,28 +3,44 @@
 import React, { useEffect, useState } from 'react';
 import { socket } from '@/lib/socket';
 
+type PollOption = {
+  text: string;
+  count?: number; // optional if not used on student side
+  percentage?: number; // optional for student view
+};
+
+// type PollData = {
+//   question: string;
+//   options: PollOption[];
+// };
+
+
 const StudentResponse: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [question, setQuestion] = useState<string>('');
   const [options, setOptions] = useState<string[]>([]);
 
   const [showResults, setShowResults] = useState(false);
-  const [resultOptions, setResultOptions] = useState<any[]>([]);
+  const [resultOptions, setResultOptions] = useState<PollOption[]>([]);
+
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
-    const handleNewQuestion = (data: any) => {
+    const handleNewQuestion = (data: PollData) => {
       console.log('📢 Question received in StudentResponse:', data);
       setQuestion(data.question);
-      const optionTexts = data.options.map((opt: any) => opt.text);
+      const optionTexts = data.options.map((opt: PollOption) => opt.text);
       setOptions(optionTexts);
       setSelectedOption(null); // reset on new question
       setShowResults(false); // reset results view
       setHasSubmitted(false); // allow fresh submission
     };
 
-    const handlePollResults = (data: any) => {
+    type PollOption = { text: string; percentage: number };
+    type PollData = { question: string; options: PollOption[] };
+
+    const handlePollResults = (data: PollData) => {
       setShowResults(true);
       setResultOptions(data.options);  // { text, percentage }
     };

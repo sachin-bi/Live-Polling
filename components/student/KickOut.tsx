@@ -25,7 +25,7 @@ const KickOut: React.FC = () => {
 
       {/* Main Heading */}
       <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center leading-tight">
-        You've been Kicked out !
+        You have been Kicked out !
       </h1>
 
       {/* Sub-heading */}

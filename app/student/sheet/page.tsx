@@ -9,7 +9,19 @@ export default function SheetPage() {
   const [questionAvailable, setQuestionAvailable] = useState(false);
 
   useEffect(() => {
-    const handleNewQuestion = (data: any) => {
+
+    type PollOption = {
+      text: string;
+      count: number;
+      percentage: number;
+    };
+
+    type PollData = {
+      question: string;
+      options: PollOption[];
+    };
+
+    const handleNewQuestion = (data: PollData) => {
       console.log('📢 Question received in SheetPage:', data);
       setQuestionAvailable(true);
     };
@@ -23,7 +35,7 @@ export default function SheetPage() {
     socket.on('connect', handleConnect);
     socket.on('new-question', handleNewQuestion);
 
-      // Ensure connection
+    // Ensure connection
     if (!socket.connected) socket.connect();
     else handleConnect();
 

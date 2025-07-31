@@ -4,7 +4,18 @@ import TeachersQuestion from '@/components/teacher/TeachersQuestion';
 import { socket } from '@/lib/socket'; // Use centralized socket instead
 
 const ResultsPage = () => {
-  const [pollResults, setPollResults] = useState<any>(null);
+  type PollOption = {
+    text: string;
+    percentage: number;
+    selected: boolean; // assuming `TeachersQuestion` expects this
+  };
+
+  type PollData = {
+    question: string;
+    options: PollOption[];
+  };
+
+  const [pollResults, setPollResults] = useState<PollData | null>(null);
 
   useEffect(() => {
     // Ensure socket is connected
@@ -12,7 +23,7 @@ const ResultsPage = () => {
       socket.connect();
     }
 
-    socket.on('poll-results', (data) => {
+    socket.on('poll-results', (data: PollData) => {
       setPollResults(data); // contains question, options, percentages
     });
 

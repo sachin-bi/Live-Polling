@@ -73,12 +73,12 @@ const TeacherPg: React.FC = () => {
 
       {/* Main Heading */}
       <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center leading-tight">
-        Let's Get Started
+        Lets Get Started
       </h1>
 
       {/* Sub-heading */}
       <p className="text-lg text-gray-600 mb-12 text-center max-w-xl px-4">
-        you'll have the ability to create and manage polls, ask questions, and monitor your students' responses in real-time.
+        you will have the ability to create and manage polls, ask questions, and monitor your students responses in real-time.
       </p>
 
       {/* Question Input Section */}

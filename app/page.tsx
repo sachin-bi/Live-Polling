@@ -46,7 +46,7 @@ export default function LandingPg() {
           hover:border-[#7765DA] transition-colors duration-300 cursor-pointer"
         >
           <h2 className="text-xl font-semibold text-gray-900 mb-2">
-            I'm a Student
+            I am a Student
           </h2>
           <p className="text-gray-600">
             Join live polls and see results in real-time.
@@ -60,7 +60,7 @@ export default function LandingPg() {
           hover:border-[#7765DA] transition-colors duration-300 cursor-pointer"
         >
           <h2 className="text-xl font-semibold text-gray-900 mb-2">
-            I'm a Teacher
+            I am a Teacher
           </h2>
           <p className="text-gray-600">
             Create polls and track real-time responses.

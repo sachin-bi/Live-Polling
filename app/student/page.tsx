@@ -42,12 +42,12 @@ const StudentPg: React.FC = () => {
 
       {/* Main Heading */}
       <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center leading-tight">
-        Let's Get Started
+        Lets Get Started
       </h1>
 
       {/* Sub-heading */}
       <p className="text-lg text-gray-600 mb-12 text-center max-w-xl px-4">
-        If you're a student, you'll be able to <span className="font-semibold text-gray-900">submit your answers</span>, participate in live
+        If you&apos;re a student, you will be able to <span className="font-semibold text-gray-900">submit your answers</span>, participate in live
         polls, and see how your responses compare with your classmates
       </p>
 
