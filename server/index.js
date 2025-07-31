@@ -9,7 +9,8 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3001', // or '*' for dev |'*', // Replace with your Vercel domain in production
+        // origin: 'http://localhost:3001', // or '*' for dev |'*', // Replace with your Vercel domain in production
+        origin: ['https://live-polling-sachinandan.vercel.app/'], // allow only frontend domain
         methods: ['GET', 'POST']
     }
 });
@@ -20,7 +21,7 @@ let totalStudents = 0;
 
 io.on('connection', (socket) => {
     console.log('🟢 New user:', socket.id);
-    
+
     // 👉 Immediately send current poll to newly connected student
     if (currentPoll) {
         socket.emit('new-question', currentPoll);

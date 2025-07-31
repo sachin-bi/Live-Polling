@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🗳️ Live Polling App
+====================
 
-## Getting Started
+A real-time polling platform built using Next.js, TypeScript, and Socket.IO. This app allows teachers to conduct live polls during sessions, and students to join, submit responses, and view results—all in real time.
 
-First, run the development server:
+------------------------------------------------------------
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🚀 Features
+-----------
+- 👨‍🏫 Teachers can send live questions
+- 🧑‍🎓 Students can join polls with their name
+- 📊 Real-time updates of answers and results using Socket.IO
+- ⏳ Wait screen for students until the question is sent
+- ✅ Tracks total students and submitted responses
+- 📈 Instant results for both teacher and students
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+------------------------------------------------------------
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🧱 Tech Stack
+-------------
+| Frontend           | Backend           | Real-Time        |
+|--------------------|-------------------|------------------|
+| Next.js (App Router) | Node.js + Express | Socket.IO         |
+| TypeScript         | TypeScript        | WebSockets       |
+| Tailwind CSS       | REST APIs         | Event-driven updates |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+------------------------------------------------------------
 
-## Learn More
+📁 Project Structure
+--------------------
+├── frontend/ (Next.js + App Router)
+│   ├── app/
+│   │   ├── student/
+│   │   │   ├── sheet/
+│   │   │   └── waiting/
+│   │   ├── teacher/
+│   │   │   ├── results/
+│   │   │   └── questions/
+│   └── components/
+│       ├── StudentResponse.tsx
+│       ├── StudentWaiting.tsx
+│       ├── TeachersQuestion.tsx
+│       └── TeachersResult.tsx
+├── backend/ (Express + Socket.IO)
+│   └── index.ts
 
-To learn more about Next.js, take a look at the following resources:
+------------------------------------------------------------
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+⚙️ Installation
+---------------
+1. Clone the repo:
+   git clone https://github.com/your-username/live-polling-app.git
+   cd live-polling-app
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Install dependencies:
+   Frontend:
+   cd frontend
+   npm install
 
-## Deploy on Vercel
+   Backend:
+   cd ../backend
+   npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+------------------------------------------------------------
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🧪 Running the App Locally
+--------------------------
+Backend (Socket.IO Server):
+   cd backend
+   npm run dev
+   → Runs on http://localhost:4000
+
+Frontend (Next.js):
+   cd frontend
+   npm run dev
+   → Runs on http://localhost:3000
+
+------------------------------------------------------------
+
+🌐 Deployment
+-------------
+Frontend (Vercel):
+- Deploy the frontend/ folder on Vercel
+- Add NEXT_PUBLIC_SOCKET_URL=https://your-backend.onrender.com to your .env
+
+Backend (Render.com):
+- Deploy the backend/ folder on Render
+- Expose port 4000
+
+------------------------------------------------------------
+
+🔗 Routes
+---------
+Students:
+- /student/sheet – Join poll & submit answer
+- /student/waiting – Wait until question appears
+
+Teachers:
+- /teacher/questions – Send question to students
+- /teacher/results – View live results
+
+------------------------------------------------------------
+
+🛠️ Environment Variables
+-------------------------
+Frontend .env:
+NEXT_PUBLIC_SOCKET_URL=http://localhost:4000
+
+Backend .env (optional):
+PORT=4000
+
+------------------------------------------------------------
+
+📸 Screenshots
+--------------
+Coming soon...
+
+------------------------------------------------------------
+
+👨‍💻 Author
+------------
+Sachin Roy
+- Portfolio: [sachin-portfolio-link]
+- LinkedIn: linkedin.com/in/sachin
+- GitHub: github.com/sachinroy-dev
+
+------------------------------------------------------------
