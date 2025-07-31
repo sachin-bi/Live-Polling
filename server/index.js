@@ -9,7 +9,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000', // or '*' for dev |'*', // Replace with your Vercel domain in production
+        origin: 'http://localhost:3001', // or '*' for dev |'*', // Replace with your Vercel domain in production
         methods: ['GET', 'POST']
     }
 });

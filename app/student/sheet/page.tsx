@@ -5,22 +5,25 @@ import StudentWaiting from '@/components/student/StudentWaiting';
 import StudentResponse from '@/components/student/StudentResponse';
 import { socket } from '@/lib/socket';
 
-
 export default function SheetPage() {
   const [questionAvailable, setQuestionAvailable] = useState(false);
 
   useEffect(() => {
-    
-
-    // Listen for a new question event
-    socket.on('new-question', (data) => {
-      console.log('Received question:', data); // logs??
+    const handleNewQuestion = (data: any) => {
+      console.log('📢 Question received in SheetPage:', data);
       setQuestionAvailable(true);
-    });
+    };
 
-    //TODO Optional cleanup / is it ok?
+    // Connect socket if not connected
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    // Listen for new question
+    socket.on('new-question', handleNewQuestion);
+
     return () => {
-      socket.off("new-question");
+      socket.off('new-question', handleNewQuestion);
     };
   }, []);
 

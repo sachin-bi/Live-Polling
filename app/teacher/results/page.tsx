@@ -1,14 +1,17 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import TeachersQuestion from '@/components/teacher/TeachersQuestion';
-import { io } from 'socket.io-client';
-
-const socket = io('http://localhost:5000'); // Adjust if needed
+import { socket } from '@/lib/socket'; // Use centralized socket instead
 
 const ResultsPage = () => {
   const [pollResults, setPollResults] = useState<any>(null);
 
   useEffect(() => {
+    // Ensure socket is connected
+    if (!socket.connected) {
+      socket.connect();
+    }
+
     socket.on('poll-results', (data) => {
       setPollResults(data); // contains question, options, percentages
     });

@@ -4,47 +4,41 @@ import React, { useEffect, useState } from 'react';
 import { socket } from '@/lib/socket';
 
 const StudentResponse: React.FC = () => {
-  // const [studentName, setStudentName] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [question, setQuestion] = useState<string>('');
   const [options, setOptions] = useState<string[]>([]);
 
-
   useEffect(() => {
-    // socket.emit('join-as-student');
     const handleConnect = () => {
       socket.emit('join-as-student');
       console.log('👨‍🎓 Student joined via socket:', socket.id);
     };
 
-    // if (!socket.connected) {
-    //   socket.connect(); // 👈 IMPORTANT
-    // }
-
-    // if (socket.connected) {
-    //   handleConnect();
-    // } else {
-    //   socket.on('connect', handleConnect);
-    // }
-    socket.connect();
-    socket.on('connect', handleConnect);
-
-
-
-    // Listen for the question broadcast from teacher
-    socket.on('new-question', (data) => {
+    const handleNewQuestion = (data: any) => {
+      console.log('📢 Question received in StudentResponse:', data);
       setQuestion(data.question);
       const optionTexts = data.options.map((opt: any) => opt.text);
       setOptions(optionTexts);
       setSelectedOption(null); // reset on new question
-    });
+    };
 
-    // TODO:checkout name
-    //  setStudentName(sessionStorage.getItem('studentName'));
+    // Connect socket if not connected
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    // Set up event listeners
+    socket.on('connect', handleConnect);
+    socket.on('new-question', handleNewQuestion);
+
+    // If already connected, join as student immediately
+    if (socket.connected) {
+      handleConnect();
+    }
 
     return () => {
       socket.off('connect', handleConnect);
-      socket.off('new-question');
+      socket.off('new-question', handleNewQuestion);
     };
   }, []);
 

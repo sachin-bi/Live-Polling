@@ -3,10 +3,7 @@
 import React, { useState } from 'react';
 import OptionInput from '@/components/teacher/OptionInput';
 import { useRouter } from 'next/navigation';
-import { io } from 'socket.io-client';
-
-const socket = io('http://localhost:5000'); // your backend
-
+import { socket } from '@/lib/socket'; // Use the centralized socket
 
 const TeacherPg: React.FC = () => {
   const [options, setOptions] = useState([
@@ -15,8 +12,6 @@ const TeacherPg: React.FC = () => {
   ]);
   const [question, setQuestion] = useState('');
   const [timeLimit, setTimeLimit] = useState(60); // default to 60 seconds
-
-
 
   const router = useRouter();
 
@@ -38,6 +33,11 @@ const TeacherPg: React.FC = () => {
       return;
     }
 
+    // Ensure socket is connected before emitting
+    if (!socket.connected) {
+      socket.connect();
+    }
+
     socket.emit('new-question', {
       question,
       options: formattedOptions,
@@ -46,8 +46,6 @@ const TeacherPg: React.FC = () => {
 
     router.push('/teacher/results');
   };
-
-
 
   const handleOptionChange = (index: number, newValue: string) => {
     const updated = [...options];
